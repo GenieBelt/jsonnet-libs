@@ -10,14 +10,14 @@ function(namespace='test') {
     injectLabels: true,
     resourceDefaults: {
       labels: {
-        'letsbuild.com/service': 'test',
+        'geniebelt.com/service': 'test',
       },
     },
   },
 
   // Configure test environment
   data:
-    (import 'letsbuilders/postgres.libsonnet') +
+    (import 'geniebelt/postgres.libsonnet') +
     {
       _config+:: {
         clusterDomain: 'test.lb4.co',

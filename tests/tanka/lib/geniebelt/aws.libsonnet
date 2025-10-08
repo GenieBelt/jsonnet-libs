@@ -5,7 +5,7 @@
         region: 'eu-west-1',
         clusterName: 'test1',
         accountId: '1111111111111',
-        accountName: 'letsbuild-test',
+        accountName: 'geniebelt-test',
         oidcUrl: 'oidc.eks.eu-west-1.amazonaws.com/id/TESTTESTTESTTESTTESTTEST',
         crossplaneProvider: 'aws-provider',
         clusterDomain: 'test.lb4.co',

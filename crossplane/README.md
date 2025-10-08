@@ -1,7 +1,7 @@
 All resources configured by `aws-utils.libsonnet` are hidden by default. To render their manifests unhide them, for example:
 ```jsonnet
 {
-  aws: (import 'github.com/letsbuilders/jsonnet-libs/crossplane/aws-utils.libsonnet')
+  aws: (import 'github.com/GenieBelt/jsonnet-libs/crossplane/aws-utils.libsonnet')
   + { bucket::: super.bucket }
 } 
 ```
@@ -10,7 +10,7 @@ All resources configured by `aws-utils.libsonnet` are hidden by default. To rend
 
 ```jsonnet
 {
-  aws: (import 'github.com/letsbuilders/jsonnet-libs/crossplane/aws-utils.libsonnet') + {
+  aws: (import 'github.com/GenieBelt/jsonnet-libs/crossplane/aws-utils.libsonnet') + {
     _config+:: {
       aws+: {
         oidcUrl: '<oidcUrl>',

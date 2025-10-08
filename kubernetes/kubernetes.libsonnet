@@ -9,7 +9,7 @@ local objectMetadata(object, config) =
     {
       name: config.name,
       app: config.name,
-      'letsbuild.com/service': config.name,
+      'geniebelt.com/service': config.name,
       product: config.podLabels.product,
     } + config.labels
   )
@@ -25,7 +25,7 @@ local objectMetadata(object, config) =
       name: config.name,
       app: config.name,
       version: config.container.tag,
-      'letsbuild.com/service': config.name,
+      'geniebelt.com/service': config.name,
     } + config.podLabels
   )
   // Pod Annotation
@@ -53,7 +53,7 @@ local serviceSpec(object, config) =
     },
   }
   + service.metadata.withLabels(
-    { name: config.name, app: config.name, 'letsbuild.com/service': config.name }
+    { name: config.name, app: config.name, 'geniebelt.com/service': config.name }
     + config.labels
   )
   // object annotation
@@ -146,7 +146,7 @@ local ingressSpec(config, serviceObject) =
   local ingressClass = if std.objectHas(config, 'class') then config.class else 'nginx-public';
   // Set cert-managers issuer
   local certIssuer = if std.objectHas(config, 'certIssuer') then config.certIssuer else 'letsencrypt-prod';
-  // Set 'letsbuild.com/public' annotation
+  // Set 'geniebelt.com/public' annotation
   // Dictates whether should the public external-dns instance create records
   local isPublic = if std.objectHas(config, 'isPublic') then config.isPublic else false;
   // Set paths
@@ -156,14 +156,14 @@ local ingressSpec(config, serviceObject) =
   + ingress.metadata.withAnnotations(
     {
       'kubernetes.io/ingress.class': ingressClass,
-      'letsbuild.com/public': std.toString(isPublic),
+      'geniebelt.com/public': std.toString(isPublic),
       'argocd.argoproj.io/sync-wave': '1',
     }
     // Merge with config-specified annotations
     + if std.objectHas(config, 'annotations') then config.annotations else {}
   )
   + ingress.metadata.withLabels(
-    { name: config.name, app: config.name, 'letsbuild.com/service': config.name }
+    { name: config.name, app: config.name, 'geniebelt.com/service': config.name }
     + if std.objectHas(config, 'labels') then config.labels else {}
   )
   + ingress.spec.withIngressClassName(ingressClass)
@@ -187,7 +187,7 @@ local ingressSpec(config, serviceObject) =
     { hosts: config.hosts, secretName: if std.objectHas(config, 'secretName') then config.secretName else 'base-certificate' },
   ]);
 
-local letsbuildServiceDeployment(
+local serviceDeployment(
   deploymentConfig,
   withService=true,
   withIngress=false,
@@ -320,7 +320,7 @@ local letsbuildServiceDeployment(
 
 };
 
-local letsbuildServiceStatefulSet(statefulsetConfig, withService=true, withIngress=false, ingressConfig={}) = {
+local serviceStatefulSet(statefulsetConfig, withService=true, withIngress=false, ingressConfig={}) = {
   local sts = statefulsetConfig,
   local mainContainer = containerSpecs([sts.container]),
   local sidecars = containerSpecs(sts.sidecarContainers),
@@ -420,7 +420,7 @@ local letsbuildServiceStatefulSet(statefulsetConfig, withService=true, withIngre
   ),
 };
 
-local letsbuildJob(config, withServiceAccountObject={}) = {
+local serviceJob(config, withServiceAccountObject={}) = {
   local job = k.batch.v1.job,
 
   local containers = containerSpecs([config.container]),
@@ -450,7 +450,7 @@ local letsbuildJob(config, withServiceAccountObject={}) = {
 
 {
   // Expose library methods
-  letsbuildServiceDeployment:: letsbuildServiceDeployment,
-  letsbuildServiceStatefulSet:: letsbuildServiceStatefulSet,
-  letsbuildJob:: letsbuildJob,
+  serviceDeployment:: serviceDeployment,
+  serviceStatefulSet:: serviceStatefulSet,
+  serviceJob:: serviceJob,
 }

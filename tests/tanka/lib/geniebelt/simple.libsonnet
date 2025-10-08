@@ -1,4 +1,4 @@
-local lbKubernetes = import 'kubernetes/kubernetes.libsonnet';
+local k8s = import 'kubernetes/kubernetes.libsonnet';
 
 (import 'config.libsonnet') +
 {
@@ -6,7 +6,7 @@ local lbKubernetes = import 'kubernetes/kubernetes.libsonnet';
 
   // Deployment definition
   serviceDeployment:
-    lbKubernetes.letsbuildServiceDeployment(
+    k8s.serviceDeployment(
       deploymentConfig=c.deployment,
       withService=true,
       withIngress=true,
@@ -14,7 +14,7 @@ local lbKubernetes = import 'kubernetes/kubernetes.libsonnet';
     ),
 
   statefulSet:
-    lbKubernetes.letsbuildServiceStatefulSet(c.statefulSet, withService=true),
+    k8s.serviceStatefulSet(c.statefulSet, withService=true),
   job:
-    lbKubernetes.letsbuildJob(c.job),
+    k8s.serviceJob(c.job),
 }

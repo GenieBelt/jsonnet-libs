@@ -58,7 +58,7 @@ local lbInitContainers = import 'kubernetes/init-containers.libsonnet';
         {
           // Sidecar container
           name: 'test-sidecar',
-          image: 'public.ecr.aws/letsbuild/test:latest',
+          image: 'public.ecr.aws/geniebelt/test:latest',
           port: 9090,
         },
       ],
