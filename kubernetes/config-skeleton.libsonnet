@@ -16,7 +16,7 @@
       labels: {
         'app.kubernetes.io/name': common.name,
         'app.kubernetes.io/instance': '%s-%s' % [common.name, s.namespace],
-        'app.kubernetes.io/part-of': 'letsbuild',
+        'app.kubernetes.io/part-of': 'geniebelt',
       },
 
       // Object annotations
@@ -97,18 +97,18 @@
       // nodeSelector for Pods
       nodeSelector: {
         'kubernetes.io/os': 'linux',
-        'letsbuild.com/purpose': 'worker',
+        'geniebelt.com/purpose': 'worker',
         'kubernetes.io/arch': 'amd64',
       },
 
       // Pod Labels
       podLabels: {
         dept: 'product',
-        product: 'letsbuild',
+        product: 'geniebelt',
         env: s.namespace,
         'app.kubernetes.io/name': common.name,
         'app.kubernetes.io/instance': '%s-%s' % [common.name, s.namespace],
-        'app.kubernetes.io/part-of': 'letsbuild',
+        'app.kubernetes.io/part-of': 'geniebelt',
       },
 
       // Pod annotation
@@ -274,7 +274,7 @@
       labels: {
         'app.kubernetes.io/name': s.name,
         'app.kubernetes.io/instance': '%s-%s' % [s.name, s.namespace],
-        'app.kubernetes.io/part-of': 'letsbuild',
+        'app.kubernetes.io/part-of': 'geniebelt',
       },
 
       // Object annotations
@@ -290,7 +290,7 @@
       labels: {
         'app.kubernetes.io/name': s.name,
         'app.kubernetes.io/instance': '%s-%s' % [s.name, s.namespace],
-        'app.kubernetes.io/part-of': 'letsbuild',
+        'app.kubernetes.io/part-of': 'geniebelt',
       },
     },
     aproplanAPI: {

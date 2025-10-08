@@ -158,7 +158,6 @@ local bucketPolicy = aws.s3.v1alpha3.bucketPolicy;
   },
 
   // notificationConfiguration  for S3 virus scan
-  // https://github.com/letsbuilders/DevOps/issues/59
   notificationConfiguration:: {
     queueConfigurations: [
       {

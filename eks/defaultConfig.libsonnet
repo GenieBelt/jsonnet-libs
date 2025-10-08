@@ -9,7 +9,7 @@
   vpc: {
     cidr: '',
     id: error 'vpc.id needs to be provided',
-    // the shared node SG should be created by this module https://github.com/letsbuilders/infrastructure-letsbuild-modules/blob/master/aws/vpc/main.tf#L77
+    // the shared node SG should be created by this module https://github.com/GenieBelt/infrastructure-geniebelt-modules/blob/master/aws/vpc/main.tf#L77
     // and we use it so node can connect with a private ECR endpoint
     sharedNodeSecurityGroup:: null,
     subnets: {
@@ -42,7 +42,7 @@
                 {
                   matchExpressions: [
                     {
-                      key: 'letsbuild.com/purpose',
+                      key: 'geniebelt.com/purpose',
                       operator: 'In',
                       values: ['management'],
                     },
@@ -157,7 +157,7 @@
       instanceTypes: error 'managedNodeGroups.management.instanceTypes needs to be set',
 
       labels: {
-        'letsbuild.com/purpose': 'management',
+        'geniebelt.com/purpose': 'management',
       },
       taints: [
         {
@@ -184,7 +184,7 @@
       minSize: error 'managedNodeGroups.worker.minSize needs to be set',
       instanceTypes: error 'managedNodeGroups.worker.instanceTypes needs to be set',
       labels: {
-        'letsbuild.com/purpose': 'worker',
+        'geniebelt.com/purpose': 'worker',
       },
     },
 
@@ -193,7 +193,7 @@
       minSize: error 'managedNodeGroups.data.minSize needs to be set',
       instanceTypes: error 'managedNodeGroups.data.instanceTypes needs to be set',
       labels: {
-        'letsbuild.com/purpose': 'data',
+        'geniebelt.com/purpose': 'data',
       },
       taints: [
         {

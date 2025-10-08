@@ -1,12 +1,12 @@
 local host(name, username, address='', secretName, secretKey, endpointKey='') = {
-  apiVersion: 'postgres.letsbuild.com/v1alpha1',
+  apiVersion: 'postgres.geniebelt.com/v1alpha1',
   kind: 'Host',
   metadata: {
     name: name,
     annotations: {
       'argocd.argoproj.io/sync-wave': '1',
     },
-    finalizers: ['finalizer.postgres.letsbuild.com'],
+    finalizers: ['finalizer.postgres.geniebelt.com'],
   },
   spec: {
     [if address != '' then 'address']: address,
@@ -25,14 +25,14 @@ local database(databaseName, hostName, dropOnDeletion=true, name='', extensions=
     database: databaseName,
   },
 
-  apiVersion: 'postgres.letsbuild.com/v1alpha1',
+  apiVersion: 'postgres.geniebelt.com/v1alpha1',
   kind: 'Database',
   metadata: {
     name: if name == '' then defaultName else name,
     annotations: {
       'argocd.argoproj.io/sync-wave': '-3',
     },
-    finalizers: ['finalizer.postgres.letsbuild.com'],
+    finalizers: ['finalizer.postgres.geniebelt.com'],
   },
   spec: {
     databaseName: databaseName,
@@ -51,14 +51,14 @@ local user(username, databaseName, priv, secretName='', name='', schemaCreation=
     user: username,
   },
 
-  apiVersion: 'postgres.letsbuild.com/v1alpha2',
+  apiVersion: 'postgres.geniebelt.com/v1alpha2',
   kind: 'User',
   metadata: {
     name: if name == '' then defaultName else name,
     annotations: {
       'argocd.argoproj.io/sync-wave': '-2',
     },
-    finalizers: ['finalizer.postgres.letsbuild.com'],
+    finalizers: ['finalizer.postgres.geniebelt.com'],
   },
   spec: {
     username: username,
@@ -82,14 +82,14 @@ local publication(name, databaseName, replicaUser,schemas=[], tables=[], columns
     user: name,
   },
 
-  apiVersion: 'postgres.letsbuild.com/v1alpha1',
+  apiVersion: 'postgres.geniebelt.com/v1alpha1',
   kind: 'Publication',
   metadata: {
     name: if name == '' then defaultName else name,
     annotations: {
       'argocd.argoproj.io/sync-wave': '-1',
     },
-    finalizers: ['finalizer.postgres.letsbuild.com'],
+    finalizers: ['finalizer.postgres.geniebelt.com'],
   },
   spec: {
     publicationName: if publicationName == '' then name else publicationName,
@@ -114,14 +114,14 @@ local subscription(name, slotName, databaseName, publication, subscriptionName='
     user: name,
   },
 
-  apiVersion: 'postgres.letsbuild.com/v1alpha1',
+  apiVersion: 'postgres.geniebelt.com/v1alpha1',
   kind: 'Subscription',
   metadata: {
     name: if name == '' then defaultName else name,
     annotations: {
       'argocd.argoproj.io/sync-wave': '-1',
     },
-    finalizers: ['finalizer.postgres.letsbuild.com'],
+    finalizers: ['finalizer.postgres.geniebelt.com'],
   },
   spec: {
     subscriptionName: if subscriptionName == '' then name else subscriptionName,

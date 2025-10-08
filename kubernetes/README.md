@@ -4,10 +4,10 @@ The below example will create an autoscaled `Deployment` with 2 containers, a `S
 
 ```jsonnet
 
-local lbKubernetes = (import 'github.com/letsbuilders/jsonnet-libs/kubernetes/kubernetes.libsonnet');
-local lbInitContainers = (import 'github.com/letsbuilders/jsonnet-libs/kubernetes/init-containers.libsonnet');
+local k8s = (import 'github.com/GenieBelt/jsonnet-libs/kubernetes/kubernetes.libsonnet');
+local lbInitContainers = (import 'github.com/GenieBelt/jsonnet-libs/kubernetes/init-containers.libsonnet');
 
-(import 'github.com/letsbuilders/jsonnet-libs/kubernetes/config-skeleton.libsonnet') +
+(import 'github.com/GenieBelt/jsonnet-libs/kubernetes/config-skeleton.libsonnet') +
 { 
   _config+: {
     deployment: {
@@ -90,7 +90,7 @@ local lbInitContainers = (import 'github.com/letsbuilders/jsonnet-libs/kubernete
 
   // Application deployment
   webServiceDeployment:
-    lbKubernetes.letsbuildServiceDeployment(
+    k8s.serviceDeployment(
       deploymentConfig=c.deployment,
       withService=true,
       withIngress=true,

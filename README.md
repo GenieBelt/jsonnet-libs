@@ -1,2 +1,2 @@
 # jsonnet-libs
-A collection of Jsonnet libraries used by LetsBuild
+A collection of Jsonnet libraries used by GenieBelt
