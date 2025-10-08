@@ -17,7 +17,7 @@ function(namespace='test') {
 
   // Configure test environment
   data:
-    (import 'GenieBelt/redis.libsonnet') +
+    (import 'geniebelt/redis.libsonnet') +
     {
       _config+:: {
 

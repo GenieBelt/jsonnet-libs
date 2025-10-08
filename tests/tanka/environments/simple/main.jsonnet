@@ -17,7 +17,7 @@ function(namespace='test') {
 
   // Configure test environment
   data:
-    (import 'GenieBelt/simple.libsonnet') +
+    (import 'geniebelt/simple.libsonnet') +
     {
       _config+:: {
         clusterDomain: 'test.lb4.co',

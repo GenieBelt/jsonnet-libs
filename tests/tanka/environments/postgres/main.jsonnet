@@ -17,7 +17,7 @@ function(namespace='test') {
 
   // Configure test environment
   data:
-    (import 'GenieBelt/postgres.libsonnet') +
+    (import 'geniebelt/postgres.libsonnet') +
     {
       _config+:: {
         clusterDomain: 'test.lb4.co',
